@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Klocman.Tools;
+using UninstallTools.Factory;
 using UninstallTools.Junk.Containers;
 
 namespace UninstallTools.Junk.Confidence
@@ -58,6 +59,9 @@ namespace UninstallTools.Junk.Confidence
         internal static int MatchStringToProductName(ApplicationUninstallerEntry applicationUninstallerEntry, string str)
         {
             var productName = applicationUninstallerEntry.DisplayNameTrimmed.ToLowerInvariant();
+            if (ApplicationEntryTools.IsGenericApplicationName(productName))
+                return -1;
+
             str = str.Replace('_', ' ').ToLowerInvariant().Trim();
             var lowestLength = Math.Min(productName.Length, str.Length);
 
