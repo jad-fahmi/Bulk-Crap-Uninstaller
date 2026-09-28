@@ -56,10 +56,10 @@ namespace UninstallTools.Junk.Confidence
         /// <summary>
         /// -1 if match failed, 0 if string matched perfectly, higher if match was worse
         /// </summary>
-        internal static int MatchStringToProductName(ApplicationUninstallerEntry applicationUninstallerEntry, string str)
+        internal static int MatchStringToProductName(ApplicationUninstallerEntry applicationUninstallerEntry, string str, bool allowGenericName = false)
         {
             var productName = applicationUninstallerEntry.DisplayNameTrimmed.ToLowerInvariant();
-            if (ApplicationEntryTools.IsGenericApplicationName(productName))
+            if (!allowGenericName && ApplicationEntryTools.IsGenericApplicationName(productName))
                 return -1;
 
             str = str.Replace('_', ' ').ToLowerInvariant().Trim();

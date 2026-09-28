@@ -32,6 +32,18 @@ namespace BulkCrapUninstallerTests
 
         [TestMethod]
         [DataRow("Update")]
+        [DataRow("Updates")]
+        [DataRow("Updater")]
+        public void MatchStringToProductName_GenericName_CanBeUsedWithAnIndependentPathCheck(string name)
+        {
+            var entry = new ApplicationUninstallerEntry { DisplayName = name };
+
+            Assert.AreEqual(-1, ConfidenceGenerators.MatchStringToProductName(entry, name));
+            Assert.AreEqual(0, ConfidenceGenerators.MatchStringToProductName(entry, name, allowGenericName: true));
+        }
+
+        [TestMethod]
+        [DataRow("Update")]
         [DataRow("UPDATER")]
         [DataRow("Updates")]
         [DataRow("Update 1.2.3")]
