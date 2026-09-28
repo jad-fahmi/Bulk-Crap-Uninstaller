@@ -78,6 +78,7 @@ namespace BulkCrapUninstaller.Forms
             Application.DoEvents();
 
             InitializeComponent();
+            toolStrip.Enter += (sender, args) => toolStripButton1.Select();
 
             // Setup settings
             _setMan = new SettingTools(Settings.Default.SettingBinder, this);
